@@ -4,7 +4,6 @@ const { SimpleSpanProcessor } = require("@opentelemetry/sdk-trace-base");
 const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
 const { trace } = require("@opentelemetry/api");
 
-//Instrumentations
 const { ExpressInstrumentation } = require("opentelemetry-instrumentation-express");
 const { MongoDBInstrumentation } = require("@opentelemetry/instrumentation-mongodb");
 const { HttpInstrumentation } = require("@opentelemetry/instrumentation-http");
@@ -12,7 +11,6 @@ const { registerInstrumentations } = require("@opentelemetry/instrumentation");
 
 const { JaegerExporter } = require("@opentelemetry/exporter-jaeger");
 
-//Exporter
 module.exports = (serviceName) => {
    const exporter = new JaegerExporter();
    const provider = new NodeTracerProvider({
