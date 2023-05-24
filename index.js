@@ -1,10 +1,14 @@
 const tracer = require("./tracing")("todo-service");
 const express = require("express");
 const { MongoClient } = require("mongodb");
+
 const app = express();
 app.use(express.json());
-const port = 3000;
+
+const port = 4000;
+
 let db;
+
 const startServer = async () => {
    const client = await MongoClient.connect("mongodb://localhost:27017/");
    db = client.db("todo");
@@ -18,10 +22,12 @@ const startServer = async () => {
    });
 };
 startServer();
+
 app.get("/todo", async (req, res) => {
    const todos = await db.collection("todos").find({}).toArray();
    res.send(todos);
 });
+
 app.get("/todo/:id", async (req, res) => {
    const todo = await db.collection("todos").findOne({ id: req.params.id });
    res.send(todo);
