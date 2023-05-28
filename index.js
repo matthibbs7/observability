@@ -32,3 +32,8 @@ app.get("/todo/:id", async (req, res) => {
    const todo = await db.collection("todos").findOne({ id: req.params.id });
    res.send(todo);
 });
+
+app.get("/todo/:name", async (req, res) => {
+   const todo = await db.collection("todos").findOne({ name: req.params.name });
+   res.send(todo);
+});
